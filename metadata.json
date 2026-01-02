@@ -1,0 +1,8 @@
+{
+  "name": "BuildSense AI - Construction Intelligence",
+  "description": "An advanced AI-driven construction management suite for analyzing schedules, progress reports, and planning documents to mitigate risks and optimize site control.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

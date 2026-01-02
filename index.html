@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BuildSense AI | Neo-Construction HUD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://apis.google.com/js/api.js" async defer></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <style>
+    :root {
+      --neon-cyan: #00f3ff;
+      --neon-amber: #ffb800;
+      --neon-pink: #ff00ff;
+      --bg-dark: #050506;
+      --panel-bg: rgba(15, 15, 20, 0.85);
+    }
+    
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background-color: var(--bg-dark);
+      color: #e0e0e0;
+      overflow: hidden;
+    }
+
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* Cyber Scanline Effect */
+    body::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      z-index: 100;
+      background-size: 100% 4px, 3px 100%;
+      pointer-events: none;
+      opacity: 0.15;
+    }
+
+    .cyber-panel {
+      background: var(--panel-bg);
+      border: 1px solid rgba(0, 243, 255, 0.2);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(0, 243, 255, 0.05);
+      backdrop-filter: blur(12px);
+      position: relative;
+    }
+
+    .cyber-panel::before {
+      content: "";
+      position: absolute;
+      top: -1px; left: -1px;
+      width: 10px; height: 10px;
+      border-top: 2px solid var(--neon-cyan);
+      border-left: 2px solid var(--neon-cyan);
+    }
+
+    .cyber-panel::after {
+      content: "";
+      position: absolute;
+      bottom: -1px; right: -1px;
+      width: 10px; height: 10px;
+      border-bottom: 2px solid var(--neon-cyan);
+      border-right: 2px solid var(--neon-cyan);
+    }
+
+    .neon-text {
+      text-shadow: 0 0 8px rgba(0, 243, 255, 0.5);
+    }
+
+    .neon-border-amber {
+      border-color: rgba(255, 184, 0, 0.4);
+      box-shadow: 0 0 15px rgba(255, 184, 0, 0.1);
+    }
+
+    @keyframes flicker {
+      0% { opacity: 0.97; }
+      5% { opacity: 0.92; }
+      10% { opacity: 0.98; }
+      15% { opacity: 0.94; }
+      20% { opacity: 0.99; }
+      100% { opacity: 1; }
+    }
+
+    .hud-header {
+      animation: flicker 4s infinite;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0a0a0c; }
+    ::-webkit-scrollbar-thumb { background: var(--neon-cyan); box-shadow: 0 0 5px var(--neon-cyan); }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+      "react/": "https://esm.sh/react@^19.2.3/",
+      "react": "https://esm.sh/react@^19.2.3",
+      "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+      "recharts": "https://esm.sh/recharts@^3.6.0"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>
